@@ -1,0 +1,7 @@
+{
+  "name": "Netra Consultancy & E-Services",
+  "description": "Professional E-Services and Government Consultancy based in Solapur, Maharashtra. All digital services under one roof.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
