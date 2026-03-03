@@ -15,7 +15,9 @@ import {
   Layout, 
   HeartHandshake,
   Clock,
-  CheckCircle
+  CheckCircle,
+  Car,
+  Home
 } from 'lucide-react';
 import { Service, Testimonial } from './types';
 
@@ -69,11 +71,35 @@ export const SERVICES: Service[] = [
     icon: "Briefcase"
   },
   {
-    id: "birth-death",
-    title: "Birth & Death Certificate",
-    description: "Assistance in obtaining official birth and death records from municipal authorities.",
-    requiredDocuments: ["Hospital Documents", "Aadhaar Card of Parents/Deceased", "Application Form"],
-    processingTime: "10 - 20 Working Days",
+    id: "birth-cert",
+    title: "Birth Certificate",
+    description: "Assistance in obtaining official birth records from municipal authorities and Gram Panchayat.",
+    requiredDocuments: ["Hospital Discharge Summary", "Aadhaar Card of Parents", "Application Form"],
+    processingTime: "10 - 15 Working Days",
+    icon: "UserPlus"
+  },
+  {
+    id: "marriage-cert",
+    title: "Marriage Certificate",
+    description: "Registration of marriage and obtaining official certificate from the registrar office.",
+    requiredDocuments: ["Wedding Card", "Aadhaar Cards of Couple", "Witness Aadhaar Cards", "Joint Photo"],
+    processingTime: "15 - 30 Working Days",
+    icon: "HeartHandshake"
+  },
+  {
+    id: "name-change",
+    title: "Gazetted Name Change",
+    description: "Official name change procedure through government gazette publication and affidavits.",
+    requiredDocuments: ["Aadhaar Card", "Old Name Proof", "New Name Affidavit", "Photo"],
+    processingTime: "20 - 40 Working Days",
+    icon: "FileText"
+  },
+  {
+    id: "death-cert",
+    title: "Death Certificate",
+    description: "Assistance in obtaining official death records for legal and insurance purposes.",
+    requiredDocuments: ["Doctor's Certificate", "Cremation Receipt", "Aadhaar Card of Deceased", "Applicant ID"],
+    processingTime: "10 - 15 Working Days",
     icon: "FileText"
   },
   {
@@ -147,6 +173,70 @@ export const SERVICES: Service[] = [
     requiredDocuments: ["Identity Proof", "Address Proof", "Previous Policy (if any)"],
     processingTime: "Instant / 2 Days",
     icon: "ShieldCheck"
+  },
+  {
+    id: "learning-license",
+    title: "Learning License",
+    description: "Application for new learning license, slot booking, and test preparation guidance.",
+    requiredDocuments: ["Aadhaar Card", "Age Proof (School LC/Birth Cert)", "Address Proof", "Blood Group Report"],
+    processingTime: "2 - 5 Working Days",
+    icon: "Car"
+  },
+  {
+    id: "driving-license",
+    title: "Permanent Driving License",
+    description: "Conversion of learning license to permanent DL, slot booking for driving test.",
+    requiredDocuments: ["Learning License", "Aadhaar Card", "Vehicle for Test", "Application Form"],
+    processingTime: "30 - 45 Working Days",
+    icon: "Car"
+  },
+  {
+    id: "rc-transfer",
+    title: "Vehicle RC Transfer",
+    description: "Transfer of vehicle ownership (TO) and change of address in registration certificate.",
+    requiredDocuments: ["Original RC", "Insurance Copy", "PUC", "Seller & Buyer Aadhaar/PAN", "Form 29, 30"],
+    processingTime: "15 - 30 Working Days",
+    icon: "Car"
+  },
+  {
+    id: "license-renewal",
+    title: "DL Renewal / Correction",
+    description: "Renewal of expired driving license and corrections in name, address, or photo.",
+    requiredDocuments: ["Original DL", "Aadhaar Card", "Medical Certificate (Form 1A)", "Photos"],
+    processingTime: "10 - 20 Working Days",
+    icon: "Car"
+  },
+  {
+    id: "leave-license",
+    title: "Leave & License Registration",
+    description: "Online registration of rent agreements with digital signature and biometric verification.",
+    requiredDocuments: ["Aadhaar & PAN of Owner", "Aadhaar & PAN of Tenant", "Property Tax Receipt", "Index II"],
+    processingTime: "2 - 5 Working Days",
+    icon: "Home"
+  },
+  {
+    id: "index-2",
+    title: "Index II Extract",
+    description: "Obtaining official Index II document for property ownership verification and bank loans.",
+    requiredDocuments: ["Registration Year", "Document Number", "SRO Office Name", "Property Details"],
+    processingTime: "1 - 3 Working Days",
+    icon: "FileText"
+  },
+  {
+    id: "property-valuation",
+    title: "Property Valuation (ASR)",
+    description: "Calculating the market value of property based on Annual Statement of Rates (Ready Reckoner).",
+    requiredDocuments: ["Property Zone/Ward", "CTS Number", "Built-up Area", "Floor Number"],
+    processingTime: "1 - 2 Working Days",
+    icon: "Landmark"
+  },
+  {
+    id: "stamp-duty",
+    title: "Stamp Duty Payment (e-GRAS)",
+    description: "Online payment of stamp duty and registration fees through Maharashtra e-GRAS system.",
+    requiredDocuments: ["Challan Details", "Payer Name", "PAN Card", "Payment Amount"],
+    processingTime: "Same Day",
+    icon: "CreditCard"
   }
 ];
 
@@ -171,6 +261,20 @@ export const TESTIMONIALS: Testimonial[] = [
     location: "Solapur",
     content: "Trusted place for all government documents. They guide you clearly about the documents needed.",
     rating: 4
+  },
+  {
+    id: 4,
+    name: "Amit Deshmukh",
+    location: "Barshi",
+    content: "Got my PAN card correction done without any hassle. Highly recommended for their prompt response.",
+    rating: 5
+  },
+  {
+    id: 5,
+    name: "Priya Shinde",
+    location: "North Solapur",
+    content: "The best e-service center in Solapur. They helped me with my scholarship application and I got it approved!",
+    rating: 5
   }
 ];
 
@@ -189,7 +293,7 @@ export const WhatsAppIcon = ({ size = 24, className = "" }: { size?: number, cla
 
 export const getIcon = (iconName: string, size = 24) => {
   const icons: any = {
-    Coins, CreditCard, Store, Briefcase, FileText, Landmark, Award, Users, Zap, ShieldCheck, Layout, Clock, CheckCircle
+    Coins, CreditCard, Store, Briefcase, FileText, Landmark, Award, Users, Zap, ShieldCheck, Layout, Clock, CheckCircle, Car, HeartHandshake, UserPlus, Home
   };
   const Icon = icons[iconName] || FileText;
   return <Icon size={size} />;

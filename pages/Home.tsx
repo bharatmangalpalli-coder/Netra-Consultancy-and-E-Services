@@ -1,10 +1,33 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, MessageCircle, ArrowRight, CheckCircle, Star, BellRing, ShieldCheck } from 'lucide-react';
-import { CONTACT_INFO, SERVICES, TESTIMONIALS, getIcon, LATEST_UPDATES } from '../constants';
+import { motion, AnimatePresence } from 'motion/react';
+import { Phone, ArrowRight, CheckCircle, Star, BellRing, ShieldCheck, X, Send, MessageCircle } from 'lucide-react';
+import { CONTACT_INFO, SERVICES, TESTIMONIALS, getIcon, LATEST_UPDATES, WhatsAppIcon } from '../constants';
 
 const Home: React.FC = () => {
+  const [reviews, setReviews] = useState(TESTIMONIALS);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newReview, setNewReview] = useState({ name: '', location: '', content: '', rating: 5 });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmitReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      const review = {
+        ...newReview,
+        id: reviews.length + 1
+      };
+      setReviews([review, ...reviews]);
+      setIsModalOpen(false);
+      setNewReview({ name: '', location: '', content: '', rating: 5 });
+      setIsSubmitting(false);
+    }, 1000);
+  };
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -225,27 +248,45 @@ const Home: React.FC = () => {
       {/* Testimonials */}
       <section className="py-24 bg-[#0a0a0a]">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-sm font-bold tracking-[0.2em] text-[#D4AF37] uppercase mb-4">Customer Trust</h2>
-            <h3 className="text-4xl md:text-5xl font-black font-heading leading-tight mb-4">
-              Verified Reviews
-            </h3>
-            <p className="text-gray-500">
-              Feedback from citizens who successfully processed their documents with us.
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div className="max-w-xl">
+              <h2 className="text-sm font-bold tracking-[0.2em] text-[#D4AF37] uppercase mb-4">Customer Trust</h2>
+              <h3 className="text-4xl md:text-5xl font-black font-heading leading-tight mb-4">
+                Verified Reviews
+              </h3>
+              <p className="text-gray-500">
+                Feedback from citizens who successfully processed their documents with us.
+              </p>
+            </div>
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="bg-white/5 border border-white/10 text-white px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
+            >
+              Write a Review
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.id} className="p-8 rounded-[32px] bg-black border border-gray-800 relative">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {reviews.map((t) => (
+              <motion.div 
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                key={t.id} 
+                className="p-8 rounded-[32px] bg-black border border-gray-800 relative group hover:border-gold/30 transition-all"
+              >
                 <div className="flex gap-1 mb-6">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} size={16} className="fill-gold text-gold" />
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      size={16} 
+                      className={`${i < t.rating ? 'fill-gold text-gold' : 'text-gray-800'}`} 
+                    />
                   ))}
                 </div>
                 <p className="text-gray-300 italic mb-8 leading-relaxed">"{t.content}"</p>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center font-bold text-gray-400">
+                  <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center font-bold text-gray-400 group-hover:bg-gold/20 group-hover:text-gold transition-colors">
                     {t.name.charAt(0)}
                   </div>
                   <div>
@@ -253,11 +294,112 @@ const Home: React.FC = () => {
                     <p className="text-xs text-gray-500">{t.location}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Review Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-lg bg-[#0a0a0a] border border-gray-800 rounded-[40px] p-8 md:p-12 shadow-2xl overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-8">
+                <button 
+                  onClick={() => setIsModalOpen(false)}
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <div className="mb-8">
+                <h3 className="text-3xl font-black font-heading mb-2">Write a <span className="gold-text">Review</span></h3>
+                <p className="text-gray-500">Share your experience with our services.</p>
+              </div>
+
+              <form onSubmit={handleSubmitReview} className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Your Name</label>
+                  <input 
+                    type="text" 
+                    required
+                    className="w-full bg-black border border-gray-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-gold transition-all"
+                    placeholder="Enter your name"
+                    value={newReview.name}
+                    onChange={e => setNewReview({...newReview, name: e.target.value})}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Location</label>
+                  <input 
+                    type="text" 
+                    required
+                    className="w-full bg-black border border-gray-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-gold transition-all"
+                    placeholder="e.g. Solapur City"
+                    value={newReview.location}
+                    onChange={e => setNewReview({...newReview, location: e.target.value})}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Rating</label>
+                  <div className="flex gap-2">
+                    {[1, 2, 3, 4, 5].map(star => (
+                      <button 
+                        key={star}
+                        type="button"
+                        onClick={() => setNewReview({...newReview, rating: star})}
+                        className="transition-transform hover:scale-110"
+                      >
+                        <Star 
+                          size={28} 
+                          className={`${star <= newReview.rating ? 'fill-gold text-gold' : 'text-gray-800'}`} 
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-gray-500">Your Experience</label>
+                  <textarea 
+                    rows={4}
+                    required
+                    className="w-full bg-black border border-gray-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-gold transition-all resize-none"
+                    placeholder="How was our service?"
+                    value={newReview.content}
+                    onChange={e => setNewReview({...newReview, content: e.target.value})}
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full gold-gradient text-black font-black font-heading py-6 rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-all shadow-xl shadow-gold/20 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Review'}
+                  <Send size={20} />
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Final CTA */}
       <section className="py-24">
