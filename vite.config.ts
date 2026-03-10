@@ -16,7 +16,8 @@ export default defineConfig(({ mode }) => {
         tailwindcss(),
         VitePWA({
           registerType: 'autoUpdate',
-          includeAssets: ['icon.svg', 'pwa-192x192.png', 'pwa-512x512.png'],
+          manifestFilename: 'manifest.json',
+          includeAssets: ['icon.svg'],
           manifest: {
             name: 'Netra Consultancy & E-Services',
             short_name: 'Netra E-Services',
@@ -29,15 +30,15 @@ export default defineConfig(({ mode }) => {
             start_url: '/',
             icons: [
               {
-                src: 'pwa-192x192.png',
+                src: 'icon.svg',
                 sizes: '192x192',
-                type: 'image/png',
+                type: 'image/svg+xml',
                 purpose: 'any'
               },
               {
-                src: 'pwa-512x512.png',
+                src: 'icon.svg',
                 sizes: '512x512',
-                type: 'image/png',
+                type: 'image/svg+xml',
                 purpose: 'any'
               },
               {
