@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { Phone, ArrowRight, CheckCircle, Star, BellRing, ShieldCheck, X, Send, MessageCircle } from 'lucide-react';
+import { Phone, ArrowRight, CheckCircle, Star, BellRing, ShieldCheck, X, Send, MessageCircle, Award } from 'lucide-react';
 import { CONTACT_INFO, SERVICES, TESTIMONIALS, getIcon, LATEST_UPDATES, WhatsAppIcon } from '../constants';
 
 const Home: React.FC = () => {
@@ -57,10 +57,14 @@ const Home: React.FC = () => {
 
         <div className="container mx-auto px-4 md:px-6 relative z-10 pt-12">
           <div className="max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-800/50 border border-gray-700 text-[#D4AF37] text-xs font-bold tracking-widest uppercase mb-6">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
-              Published & Active: Solapur's Trusted Partner
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-gold/10 border border-gold/30 text-gold text-sm font-black tracking-widest uppercase mb-8 shadow-lg shadow-gold/5"
+            >
+              <ShieldCheck size={20} className="animate-pulse" />
+              SOLAPUR'S VERIFIED E-GOVERNANCE CENTER
+            </motion.div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-heading leading-[0.9] mb-8">
               ALL <span className="gold-text">E-GOVERNANCE</span><br />
               SERVICES, SIMPLIFIED.
@@ -400,6 +404,29 @@ const Home: React.FC = () => {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Verified Banner Section */}
+      <section className="py-12 bg-gold/5 border-y border-gold/10 overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center md:text-left">
+            <div className="flex items-center gap-4">
+              <div className="w-20 h-20 rounded-full bg-gold/10 flex items-center justify-center text-gold border border-gold/20 shadow-2xl">
+                <ShieldCheck size={40} />
+              </div>
+              <div>
+                <h4 className="text-2xl font-black font-heading text-white">GOVERNMENT VERIFIED</h4>
+                <p className="text-gold font-bold tracking-widest text-xs uppercase">Official E-Governance Service Partner</p>
+              </div>
+            </div>
+            <div className="hidden md:block w-px h-12 bg-gold/20"></div>
+            <div className="max-w-md">
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Netra Consultancy is a registered and verified e-service provider in Solapur, ensuring 100% legal compliance and data security for all your documents.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Final CTA */}
       <section className="py-24">

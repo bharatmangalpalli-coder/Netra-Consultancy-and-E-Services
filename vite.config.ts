@@ -16,22 +16,32 @@ export default defineConfig(({ mode }) => {
         tailwindcss(),
         VitePWA({
           registerType: 'autoUpdate',
-          includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+          includeAssets: ['icon.svg'],
           manifest: {
             name: 'Netra Consultancy & E-Services',
             short_name: 'Netra E-Services',
-            description: 'Professional E-Services and Government Consultancy based in Solapur, Maharashtra.',
-            theme_color: '#000000',
+            description: 'Solapur\'s Trusted E-Governance Service Partner. Professional E-Services and Government Consultancy.',
+            theme_color: '#D4AF37',
             background_color: '#000000',
             display: 'standalone',
+            orientation: 'portrait',
+            scope: '/',
+            start_url: '/',
             icons: [
               {
                 src: 'icon.svg',
-                sizes: '192x192 512x512',
+                sizes: '192x192',
+                type: 'image/svg+xml',
+                purpose: 'any maskable'
+              },
+              {
+                src: 'icon.svg',
+                sizes: '512x512',
                 type: 'image/svg+xml',
                 purpose: 'any maskable'
               }
-            ]
+            ],
+            categories: ["business", "government", "finance"]
           }
         })
       ],

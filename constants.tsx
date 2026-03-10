@@ -26,6 +26,8 @@ export const CONTACT_INFO = {
   email: "netragroupofservices@gmail.com",
   address: "Pragati Chowk, Juna Vidi Gharukul, Hira-Moti Apartment Premises, Solapur, Maharashtra 413006",
   whatsapp: "918999225434",
+  paymentPhone: "8237401422",
+  upiId: "8237401422@ybl",
   mapsLink: "https://www.google.com/maps/search/Pragati+Chowk,+Juna+Vidi+Gharukul,+Solapur"
 };
 

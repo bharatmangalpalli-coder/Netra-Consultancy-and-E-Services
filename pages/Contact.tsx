@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, CheckCircle, CreditCard } from 'lucide-react';
 import { CONTACT_INFO, SERVICES, WhatsAppIcon } from '../constants';
 
 const Contact: React.FC = () => {
@@ -93,6 +93,23 @@ const Contact: React.FC = () => {
                     <Phone size={20} />
                     Voice Call
                   </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-8 rounded-[32px] bg-[#0a0a0a] border border-gray-800 space-y-8">
+              <h3 className="text-2xl font-bold font-heading text-white">Payment Details</h3>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-2xl gold-gradient flex items-center justify-center text-black shrink-0">
+                    <CreditCard size={24} />
+                  </div>
+                  <div>
+                    <h5 className="text-gray-500 text-xs font-bold uppercase tracking-widest mb-1">UPI / Mobile Payment</h5>
+                    <p className="text-white font-medium text-xl">{CONTACT_INFO.paymentPhone}</p>
+                    <p className="text-gray-400 text-sm mt-1">UPI ID: <span className="text-gold">{CONTACT_INFO.upiId}</span></p>
+                    <p className="text-gray-500 text-[10px] mt-2 italic">Scan and pay using any UPI app (GPay, PhonePe, Paytm)</p>
+                  </div>
                 </div>
               </div>
             </div>

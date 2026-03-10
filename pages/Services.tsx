@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 // Import Link from react-router-dom to fix "Cannot find name 'Link'" errors
 import { Link } from 'react-router-dom';
-import { Search, CheckCircle2, Clock, FileWarning, ArrowRight } from 'lucide-react';
+import { Search, CheckCircle2, Clock, FileWarning, ArrowRight, ShieldCheck } from 'lucide-react';
 import { SERVICES, CONTACT_INFO, getIcon, WhatsAppIcon } from '../constants';
+import { motion } from 'motion/react';
 
 const Services: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,6 +19,14 @@ const Services: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="max-w-4xl mx-auto text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-500 text-xs font-black tracking-widest uppercase mb-6"
+          >
+            <ShieldCheck size={16} />
+            Government Verified E-Service Center
+          </motion.div>
           <h1 className="text-4xl md:text-6xl font-black font-heading mb-6">
             Detailed <span className="gold-text">E-Services</span>
           </h1>
@@ -97,6 +106,28 @@ const Services: React.FC = () => {
             </div>
           ))}
         </div>
+
+        {/* Verified Banner Section */}
+        <section className="mt-24 py-12 bg-green-500/5 border border-green-500/10 rounded-[48px] overflow-hidden">
+          <div className="container mx-auto px-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex items-center gap-6">
+                <div className="w-20 h-20 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 border border-green-500/20 shadow-2xl">
+                  <ShieldCheck size={40} />
+                </div>
+                <div>
+                  <h4 className="text-2xl font-black font-heading text-white uppercase leading-none mb-2">Government Verified</h4>
+                  <p className="text-green-500 font-bold tracking-widest text-xs uppercase">Official E-Governance Service Partner</p>
+                </div>
+              </div>
+              <div className="max-w-md text-center md:text-left">
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Every document processed through Netra Consultancy is handled with 100% legal compliance. We are a verified e-service center serving Solapur since 2018.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {filteredServices.length === 0 && (
           <div className="text-center py-20">

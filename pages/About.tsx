@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { Shield, Target, Eye, Handshake, Landmark } from 'lucide-react';
+import { Shield, Target, Eye, Handshake, Landmark, ShieldCheck } from 'lucide-react';
 import { CONTACT_INFO } from '../constants';
+import { motion } from 'motion/react';
 
 const About: React.FC = () => {
   return (
@@ -11,6 +12,14 @@ const About: React.FC = () => {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-black tracking-widest uppercase"
+              >
+                <ShieldCheck size={14} />
+                Verified E-Service Center
+              </motion.div>
               <h2 className="text-sm font-bold tracking-[0.2em] text-[#D4AF37] uppercase">Our Story</h2>
               <h1 className="text-4xl md:text-6xl font-black font-heading leading-tight">
                 Netra Consultancy: Your Trusted <span className="gold-text">E-Partner</span> in Solapur

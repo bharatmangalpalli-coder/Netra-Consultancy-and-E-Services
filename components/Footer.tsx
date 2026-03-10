@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Instagram, Facebook, Linkedin, ShieldCheck } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram, Facebook, Linkedin, ShieldCheck, CreditCard } from 'lucide-react';
 import { CONTACT_INFO } from '../constants';
 
 const Footer: React.FC = () => {
@@ -29,11 +29,11 @@ const Footer: React.FC = () => {
             </p>
             
             {/* Verification Badge */}
-            <div className="inline-flex items-center gap-3 bg-white/5 px-4 py-2 rounded-xl border border-white/10">
-              <ShieldCheck className="text-gold" size={24} />
+            <div className="inline-flex items-center gap-4 bg-gold/5 px-5 py-3 rounded-2xl border border-gold/20 shadow-lg shadow-gold/5">
+              <ShieldCheck className="text-gold animate-pulse" size={28} />
               <div>
-                <p className="text-[10px] uppercase font-black text-white/50 tracking-tighter">Status: Published</p>
-                <p className="text-xs font-bold text-white">Verified E-Center</p>
+                <p className="text-[10px] uppercase font-black text-gold tracking-widest">OFFICIAL STATUS</p>
+                <p className="text-sm font-black text-white uppercase tracking-tighter">Verified E-Center</p>
               </div>
             </div>
 
@@ -94,6 +94,13 @@ const Footer: React.FC = () => {
                   {CONTACT_INFO.email}
                 </a>
               </li>
+              <li className="flex items-center gap-3 pt-2">
+                <CreditCard className="text-[#D4AF37] shrink-0" size={18} />
+                <div className="flex flex-col">
+                  <span className="text-white text-xs font-bold">UPI: {CONTACT_INFO.paymentPhone}</span>
+                  <span className="text-gray-500 text-[10px]">{CONTACT_INFO.upiId}</span>
+                </div>
+              </li>
             </ul>
           </div>
         </div>
@@ -103,6 +110,8 @@ const Footer: React.FC = () => {
             © {new Date().getFullYear()} Netra Consultancy & E-Services. All Rights Reserved.
           </p>
           <div className="flex gap-4">
+             <Link to="/privacy" className="text-gray-500 text-[10px] uppercase font-bold tracking-widest hover:text-gold transition-colors">Privacy Policy</Link>
+             <span className="text-gray-500 text-[10px] uppercase font-bold tracking-widest">|</span>
              <span className="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Active Since 2018</span>
              <span className="text-gray-500 text-[10px] uppercase font-bold tracking-widest">|</span>
              <span className="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Solapur, Maharashtra</span>
